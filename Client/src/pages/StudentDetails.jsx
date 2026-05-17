@@ -248,7 +248,7 @@ const StudentDetails = () => {
                             </div>
                         )}
 
-                        {studentStatus !== 'Active' && (
+                        {student.status !== 'Active' && (
                             <div className="bg-orange-500/20 p-4 rounded-xl backdrop-blur-sm border border-orange-400/30 text-center">
                                 <p className="text-sm text-orange-50 font-bold uppercase tracking-wider">Discharged</p>
                             </div>
