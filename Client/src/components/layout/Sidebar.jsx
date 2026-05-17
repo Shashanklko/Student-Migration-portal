@@ -124,6 +124,16 @@ const Sidebar = () => {
                 )}
             </nav>
             <div className="p-4 border-t border-gray-100">
+                <div className="mb-4 px-4 py-2 bg-gray-50 rounded-lg">
+                    {user?.role === 'admin' ? (
+                        <p className="text-sm font-bold text-gray-900">Admin</p>
+                    ) : (
+                        <>
+                            <p className="text-sm font-bold text-gray-900">{user?.name || "Institution"}</p>
+                            <p className="text-xs text-gray-500 font-mono">ID: {user?.id}</p>
+                        </>
+                    )}
+                </div>
                 <button 
                     onClick={handleLogout}
                     className="flex items-center gap-3 w-full px-4 py-3 rounded-lg transition-colors text-sm font-medium text-red-600 hover:bg-red-50"

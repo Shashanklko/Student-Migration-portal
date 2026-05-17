@@ -7,14 +7,13 @@ const TransferStudent = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [student, setStudent] = useState(null);
     const [error, setError] = useState("");
-    
-    // Grab the current logged in school to show who is enrolling them
+  
     const { user } = useContext(AuthContext);
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        setError(""); // Clear previous errors
-        setStudent(null); // Clear previous student
+        setError(""); 
+        setStudent(null);
 
         if (!searchQuery.trim()) return;
 
@@ -81,11 +80,11 @@ const TransferStudent = () => {
                 )}
             </div>
 
-            {/* Search Results & The Business Rule */}
+          
             {student && (
                 <div className="bg-white rounded-2xl shadow-sm border border-blue-100 p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                     
-                    {/* Student Mini Profile */}
+                    
                     <div className="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between border-b border-gray-100 pb-6 mb-6">
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center shrink-0 border-2 border-blue-100">
@@ -103,9 +102,9 @@ const TransferStudent = () => {
                         </div>
                     </div>
 
-                    {/* THE BUSINESS RULE IMPLEMENTATION */}
+                    
                     {student.status === 'Active' ? (
-                        /* BLOCKED STATE */
+                        
                         <div className="bg-red-50 rounded-xl p-6 border border-red-200 space-y-4">
                             <h3 className="font-bold text-red-900 flex items-center gap-2">
                                 <AlertCircle size={20} className="text-red-600" />
@@ -127,7 +126,7 @@ const TransferStudent = () => {
                             </div>
                         </div>
                     ) : (
-                        /* ALLOWED STATE */
+                      
                         <div className="bg-green-50 rounded-xl p-6 border border-green-200 space-y-4">
                             <h3 className="font-bold text-green-900 flex items-center gap-2">
                                 <UserCheck size={20} className="text-green-600" />
