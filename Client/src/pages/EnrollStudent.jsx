@@ -3,7 +3,7 @@ import { Search, UserX, UserCheck, AlertCircle, Send } from 'lucide-react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
-const TransferStudent = () => {
+const EnrollStudent = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [student, setStudent] = useState(null);
     const [error, setError] = useState("");
@@ -153,4 +153,4 @@ const TransferStudent = () => {
     );
 };
 
-export default TransferStudent;
+export default EnrollStudent;

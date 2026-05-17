@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard';
 import AddStudent from './pages/AddStudent';
 import StudentDetails from './pages/StudentDetails';
 import SearchStudent from './pages/SearchStudent';
-import TransferStudent from './pages/TransferStudent';
+import EnrollStudent from './pages/EnrollStudent';
 import CurrentStudents from './pages/CurrentStudents';
 import AddSchool from './pages/AddSchool';
 import ListedSchools from './pages/ListedSchools';
@@ -23,7 +23,7 @@ const App = () => {
                     <Route path="addStudent" element={<AddStudent />} />
                     <Route path="student/:id" element={<StudentDetails/>}/>
                     <Route path="search" element={<SearchStudent />} />
-                    <Route path="transfer" element={<TransferStudent />} />
+                    <Route path="enroll" element={<EnrollStudent />} />
                     <Route path="students" element={<CurrentStudents />} />
                     <Route path="addSchool" element={<AddSchool />} />
                     <Route path="schools" element={<ListedSchools />} />

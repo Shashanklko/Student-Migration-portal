@@ -41,7 +41,7 @@ const Dashboard = () => {
                             <p className="text-gray-500 text-sm">Register a completely new student into the education system.</p>
                         </Link>
 
-                        <Link to="/dashboard/transfer" className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center text-center group cursor-pointer">
+                        <Link to="/dashboard/enroll" className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center text-center group cursor-pointer">
                             <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 <ArrowRightLeft size={32} />
                             </div>

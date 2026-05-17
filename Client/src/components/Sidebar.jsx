@@ -48,7 +48,7 @@ const Sidebar = () => {
                             Add Fresh Student
                         </NavLink>               
                         <NavLink
-                            to="/dashboard/transfer"
+                            to="/dashboard/enroll"
                             className={({ isActive }) =>
                                 `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium ${isActive
                                     ? "bg-gray-900 text-white shadow-md"
