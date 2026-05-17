@@ -28,8 +28,15 @@ const AddStudent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Generate a random unique ID (Mock logic for frontend)
-            const uniqueId = `STU${Math.floor(100000 + Math.random() * 900000)}`;
+            // Generate ID based on: First Name + DOB Month + DOB Full Year + 4 random digits
+            // Example: RAHUL0520104819
+            const firstName = formData.studentName.split(' ')[0].toUpperCase();
+            const dobParts = formData.dob ? formData.dob.split('-') : ['0000', '00']; // YYYY-MM-DD
+            const year = dobParts[0]; // Full 4-digit year
+            const month = dobParts[1];
+            const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+            
+            const uniqueId = `${firstName}${month}${year}${randomSuffix}`;
             
             await axios.post('/api/student', {
                 uniqueId,
