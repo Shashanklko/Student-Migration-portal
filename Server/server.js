@@ -242,12 +242,16 @@ app.put('/api/schools/:id/password', async (req, res) => {
 
 // Serve frontend in production
 const path = require('path');
-app.use(express.static(path.join(__dirname, '../Client/dist')));
+const staticPath = path.join(__dirname, '../Client/dist');
+console.log('Static files path:', staticPath);
+app.use(express.static(staticPath));
 
 // Catch-all route to serve index.html for SPA (only for non-API routes)
 app.use((req, res) => {
     if (req.path.startsWith('/api')) {
         res.status(404).json({ error: 'API route not found' });
+    } else if (req.path.startsWith('/assets')) {
+        res.status(404).send('Asset not found');
     } else {
         res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
     }
