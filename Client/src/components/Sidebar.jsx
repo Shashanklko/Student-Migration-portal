@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, UserPlus, ArrowRightLeft, Users, Search, History, LogOut, Building } from 'lucide-react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Sidebar = () => {
     // 1. Grab the current user and logout from our context
