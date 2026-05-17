@@ -82,8 +82,37 @@ app.get('/api/schools/:id/students', async (req, res) => {
 // 4. ADD FRESH STUDENT
 // ==========================================
 app.post('/api/student', async (req, res) => {
-    const { uniqueId, name, fatherName, motherName, dob, gender, address, currentClass, schoolId } = req.body;
+    const { name, fatherName, motherName, dob, gender, address, currentClass, schoolId } = req.body;
     try {
+        // Generate base ID: RAHUL052010
+        const firstName = name.split(' ')[0].toUpperCase();
+        const dobParts = dob ? dob.split('-') : ['0000', '00']; 
+        const year = dobParts[0]; 
+        const month = dobParts[1];
+        const baseId = `${firstName}${month}${year}`;
+
+        // Check for existing base IDs to determine serial number
+        const [rows] = await pool.query('SELECT uniqueId FROM students WHERE uniqueId LIKE ? ORDER BY uniqueId DESC', [`${baseId}%`]);
+        
+        let uniqueId = baseId;
+        if (rows.length > 0) {
+            let maxSerial = -1;
+            for (let row of rows) {
+                if (row.uniqueId === baseId) {
+                    if (maxSerial < 0) maxSerial = 0;
+                } else {
+                    const suffix = row.uniqueId.replace(baseId, '');
+                    if (!isNaN(suffix) && suffix !== '') {
+                        const num = parseInt(suffix, 10);
+                        if (num > maxSerial) maxSerial = num;
+                    }
+                }
+            }
+            if (maxSerial >= 0) {
+                uniqueId = `${baseId}${maxSerial + 1}`;
+            }
+        }
+
         await pool.query(`
             INSERT INTO students (uniqueId, name, fatherName, motherName, dob, gender, address, status, currentSchoolId, currentClass)
             VALUES (?, ?, ?, ?, ?, ?, ?, 'Active', ?, ?)
@@ -95,7 +124,7 @@ app.post('/api/student', async (req, res) => {
             VALUES (?, ?, YEAR(CURDATE()), 'Present')
         `, [uniqueId, schoolId]);
 
-        res.json({ message: 'Student added successfully' });
+        res.json({ message: 'Student added successfully', uniqueId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

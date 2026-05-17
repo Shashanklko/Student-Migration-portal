@@ -28,18 +28,7 @@ const AddStudent = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Generate ID based on: First Name + DOB Month + DOB Full Year + 4 random digits
-            // Example: RAHUL0520104819
-            const firstName = formData.studentName.split(' ')[0].toUpperCase();
-            const dobParts = formData.dob ? formData.dob.split('-') : ['0000', '00']; // YYYY-MM-DD
-            const year = dobParts[0]; // Full 4-digit year
-            const month = dobParts[1];
-            const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-            
-            const uniqueId = `${firstName}${month}${year}${randomSuffix}`;
-            
-            await axios.post('/api/student', {
-                uniqueId,
+            const response = await axios.post('/api/student', {
                 name: formData.studentName,
                 fatherName: formData.fatherName,
                 motherName: formData.motherName,
@@ -50,7 +39,8 @@ const AddStudent = () => {
                 schoolId: user.id
             });
 
-            alert(`Student ${formData.studentName} registered successfully! Unique ID: ${uniqueId}`);
+            const generatedId = response.data.uniqueId;
+            alert(`Student ${formData.studentName} registered successfully! Unique ID: ${generatedId}`);
             
             // Reset form after submission
             setFormData({
