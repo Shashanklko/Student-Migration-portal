@@ -245,7 +245,8 @@ const path = require('path');
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../Client/dist')));
     
-    app.get('(.*)', (req, res) => {
+    // Catch-all route to serve index.html for SPA
+    app.use((req, res) => {
         res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
     });
 }
