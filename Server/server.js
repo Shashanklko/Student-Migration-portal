@@ -242,14 +242,16 @@ app.put('/api/schools/:id/password', async (req, res) => {
 
 // Serve frontend in production
 const path = require('path');
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../Client/dist')));
-    
-    // Catch-all route to serve index.html for SPA
-    app.use((req, res) => {
+app.use(express.static(path.join(__dirname, '../Client/dist')));
+
+// Catch-all route to serve index.html for SPA (only for non-API routes)
+app.use((req, res) => {
+    if (req.path.startsWith('/api')) {
+        res.status(404).json({ error: 'API route not found' });
+    } else {
         res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
-    });
-}
+    }
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
