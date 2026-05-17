@@ -201,7 +201,7 @@ app.post('/api/schools', async (req, res) => {
     const { schoolId, name, region, password } = req.body;
     try {
         // 1. Insert into schools
-        await pool.query('INSERT INTO schools (id, name, region, password) VALUES (?, ?, ?, ?)', [schoolId, name, region, password]);
+        await pool.query('INSERT INTO schools (id, name, region) VALUES (?, ?, ?)', [schoolId, name, region]);
         
         // 2. Insert into users table to grant login access
         await pool.query('INSERT INTO users (username, password, role, referenceId) VALUES (?, ?, ?, ?)', [schoolId, password, 'school', schoolId]);
@@ -230,8 +230,7 @@ app.get('/api/schools', async (req, res) => {
 app.put('/api/schools/:id/password', async (req, res) => {
     const { password } = req.body;
     try {
-        // Update password in both tables
-        await pool.query('UPDATE schools SET password = ? WHERE id = ?', [password, req.params.id]);
+        // Update password in users table
         await pool.query('UPDATE users SET password = ? WHERE referenceId = ? AND role = "school"', [password, req.params.id]);
         
         res.json({ message: 'Password reset successfully' });
