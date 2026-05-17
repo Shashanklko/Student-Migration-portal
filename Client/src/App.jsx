@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Route, Router, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import { AuthProvider } from './context/AuthContext';
-import DashBoardLayout from './components/layout/DashboardLayout';
+import DashBoardLayout from './components/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import AddStudent from './pages/AddStudent';
 import StudentDetails from './pages/StudentDetails';

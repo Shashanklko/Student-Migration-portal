@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom"
-import Sidebar from "./layout/Sidebar";
+import Sidebar from "./Sidebar";
 
 const DashBoardLayout = () => {
     const location = useLocation();
