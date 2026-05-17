@@ -41,7 +41,7 @@ const TransferStudent = () => {
     return (
         <div className="max-w-3xl mx-auto space-y-6 mt-10">
             <div className="text-center space-y-2 mb-8">
-                <h1 className="text-3xl font-bold text-gray-900">Transfer & Enroll Student</h1>
+                <h1 className="text-3xl font-bold text-gray-900">Enroll Student</h1>
                 <p className="text-gray-500">Search for a student using their Unique ID to enroll them into your institution.</p>
             </div>
 
