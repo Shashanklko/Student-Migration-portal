@@ -3,10 +3,19 @@ import { Search, UserX, UserCheck, AlertCircle, Send } from 'lucide-react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
+const classOptions = [
+    "Class 1", "Class 2", "Class 3", "Class 4", "Class 5",
+    "Class 6", "Class 7", "Class 8", "Class 9", "Class 10",
+    "Class 11 (PCM)", "Class 11 (PCB)", "Class 11 (Commerce)", "Class 11 (Arts)",
+    "Class 12 (PCM)", "Class 12 (PCB)", "Class 12 (Commerce)", "Class 12 (Arts)",
+    "Graduation", "Post Graduation"
+];
+
 const EnrollStudent = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [student, setStudent] = useState(null);
     const [error, setError] = useState("");
+    const [enrollmentClass, setEnrollmentClass] = useState("");
   
     const { user } = useContext(AuthContext);
 
@@ -14,6 +23,7 @@ const EnrollStudent = () => {
         e.preventDefault();
         setError(""); 
         setStudent(null);
+        setEnrollmentClass(""); 
 
         if (!searchQuery.trim()) return;
 
@@ -26,13 +36,19 @@ const EnrollStudent = () => {
     };
 
     const handleEnroll = async () => {
+        if (!enrollmentClass) {
+            alert("Please select the class for enrollment.");
+            return;
+        }
         try {
             await axios.post(`/api/student/${student.uniqueId}/enroll`, {
-                schoolId: user.id
+                schoolId: user.id,
+                currentClass: enrollmentClass
             });
             alert(`Successfully Enrolled ${student.name} into ${user?.name || "Your School"}!`);
             setStudent(null);
             setSearchQuery("");
+            setEnrollmentClass("");
         } catch (err) {
             alert(err.response?.data?.error || "Failed to enroll student");
         }
@@ -136,6 +152,22 @@ const EnrollStudent = () => {
                                 This student has been properly discharged from their previous institution and is ready to be enrolled into your roster.
                             </p>
                             
+                            {/* Class Selection Form */}
+                            <div className="mt-4 p-4 bg-white rounded-xl border border-green-100">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Select Class/Stream for Enrollment</label>
+                                <select 
+                                    value={enrollmentClass}
+                                    onChange={(e) => setEnrollmentClass(e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white"
+                                    required
+                                >
+                                    <option value="">-- Select Class --</option>
+                                    {classOptions.map((option, index) => (
+                                        <option key={index} value={option}>{option}</option>
+                                    ))}
+                                </select>
+                            </div>
+
                             <div className="pt-4">
                                 <button 
                                     onClick={handleEnroll}

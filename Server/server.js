@@ -173,14 +173,14 @@ app.post('/api/student/:id/transfer', async (req, res) => {
 // 7. ENROLL EXISTING STUDENT
 // ==========================================
 app.post('/api/student/:id/enroll', async (req, res) => {
-    const { schoolId } = req.body;
+    const { schoolId, currentClass } = req.body;
     try {
-        // 1. Mark as Active and bind to new school
+        // 1. Mark as Active and bind to new school, update class
         await pool.query(`
             UPDATE students 
-            SET status = 'Active', currentSchoolId = ? 
+            SET status = 'Active', currentSchoolId = ?, currentClass = ? 
             WHERE uniqueId = ?
-        `, [schoolId, req.params.id]);
+        `, [schoolId, currentClass, req.params.id]);
         
         // 2. Start a new timeline record
         await pool.query(`
