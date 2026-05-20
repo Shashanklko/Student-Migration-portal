@@ -4,7 +4,7 @@ async function fixDatabase() {
     console.log("Refactoring database for Enterprise Auth...");
 
     try {
-        // 1. Remove password from schools
+        
         try {
             await pool.query(`ALTER TABLE schools DROP COLUMN password;`);
             console.log("✅ Removed password from schools table.");
@@ -12,7 +12,7 @@ async function fixDatabase() {
             console.log("⚠️ Password column already removed or doesn't exist.");
         }
 
-        // 2. Create central users table
+        
         await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,

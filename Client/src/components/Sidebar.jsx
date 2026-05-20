@@ -4,7 +4,7 @@ import { LayoutDashboard, UserPlus, ArrowRightLeft, Users, Search, History, LogO
 import { AuthContext } from '../context/AuthContext';
 
 const Sidebar = () => {
-    // 1. Grab the current user and logout from our context
+   
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Sidebar = () => {
         <aside className="flex flex-col h-full">
            <h1 className="p-6 font-bold text-xl text-gray-900">Dashboard</h1>
             <nav className='flex-1 space-y-2 p-4'>
-                {/* Everyone sees the Home link */}
+               
                 <NavLink
                     to="/dashboard"
                     end
@@ -32,7 +32,7 @@ const Sidebar = () => {
                     Home
                 </NavLink>
 
-                {/* Only 'school' role sees Add and Transfer */}
+               
                 {user?.role === 'school' && (
                     <>
                         <NavLink
@@ -62,7 +62,6 @@ const Sidebar = () => {
                     </>
                 )}
 
-                {/* Only 'admin' role sees Register School & Listed Schools */}
                 {user?.role === 'admin' && (
                     <>
                         <NavLink
@@ -93,7 +92,6 @@ const Sidebar = () => {
                     </>
                 )}
 
-                {/* Only 'school' sees Students and Search */}
                 {user?.role === 'school' && (
                     <>
                         <NavLink

@@ -4,7 +4,7 @@ async function initializeDatabase() {
     console.log("Initializing database tables in TiDB...");
 
     try {
-        // Create Schools Table
+        
         await pool.query(`
             CREATE TABLE IF NOT EXISTS schools (
                 id VARCHAR(50) PRIMARY KEY,
@@ -15,7 +15,7 @@ async function initializeDatabase() {
         `);
         console.log("✅ 'schools' table ready.");
 
-        // Create Students Table
+        
         await pool.query(`
             CREATE TABLE IF NOT EXISTS students (
                 uniqueId VARCHAR(50) PRIMARY KEY,
@@ -33,7 +33,7 @@ async function initializeDatabase() {
         `);
         console.log("✅ 'students' table ready.");
 
-        // Create Student History Table
+        
         await pool.query(`
             CREATE TABLE IF NOT EXISTS student_history (
                 id INT AUTO_INCREMENT PRIMARY KEY,
