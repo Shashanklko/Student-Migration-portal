@@ -28,6 +28,14 @@ async function initializeDatabase() {
                 status ENUM('Active', 'Transferred', 'Passed') DEFAULT 'Active',
                 currentSchoolId VARCHAR(50),
                 currentClass VARCHAR(50),
+                courseType VARCHAR(100) DEFAULT 'School',
+                course VARCHAR(100) DEFAULT NULL,
+                branch VARCHAR(100) DEFAULT NULL,
+                rollNumber VARCHAR(100) DEFAULT NULL,
+                admissionYear INT DEFAULT NULL,
+                graduationYear INT DEFAULT NULL,
+                email VARCHAR(255) DEFAULT NULL,
+                phoneNumber VARCHAR(50) DEFAULT NULL,
                 FOREIGN KEY (currentSchoolId) REFERENCES schools(id)
             );
         `);
@@ -42,6 +50,8 @@ async function initializeDatabase() {
                 joinedYear VARCHAR(20),
                 leftYear VARCHAR(20),
                 lastClass VARCHAR(50),
+                lastCourse VARCHAR(100) DEFAULT NULL,
+                lastBranch VARCHAR(100) DEFAULT NULL,
                 FOREIGN KEY (studentId) REFERENCES students(uniqueId),
                 FOREIGN KEY (schoolId) REFERENCES schools(id)
             );

@@ -18,6 +18,7 @@ const Sidebar = () => {
            <h1 className="p-6 font-bold text-xl text-gray-900">Dashboard</h1>
             <nav className='flex-1 space-y-2 p-4'>
                
+               {/* isActive status check weather user is in this page or not */}
                 <NavLink
                     to="/dashboard"
                     end
@@ -92,7 +93,7 @@ const Sidebar = () => {
                     </>
                 )}
 
-                {user?.role === 'school' && (
+                {(user?.role === 'school' || user?.role === 'school-admin') && (
                     <>
                         <NavLink
                             to="/dashboard/students"
@@ -118,6 +119,20 @@ const Sidebar = () => {
                             <Search size={20} />
                             Search Student
                         </NavLink>
+                        {user?.role === 'school-admin' && (
+                            <NavLink
+                                to="/dashboard/schoolProfile"
+                                className={({ isActive }) =>
+                                    `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium ${isActive
+                                        ? "bg-gray-900 text-white shadow-md"
+                                        : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
+                                    }`
+                                }
+                            >
+                                <Building size={20} />
+                                Institution Profile
+                            </NavLink>
+                        )}
                     </>
                 )}
             </nav>
